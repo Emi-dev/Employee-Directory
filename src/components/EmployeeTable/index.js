@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import Table from "react-bootstrap/Table";
 import EmployeeRow from "../EmployeeRow";
 import API from "../../utils/API";
 
@@ -22,7 +23,14 @@ class EmployeeTable extends React.Component {
     render() {
         return (
             <div className="container">
-            <table className="table table-dark rounded">
+            {/* <table className="table table-dark rounded"> */}
+            <Table variant="dark" rounded hover>
+                <thead>
+                    <th>ID</th>
+                    <th>Photo</th>
+                    <th>Login</th>
+                    <th>Repos</th>
+                </thead>
                 <tbody>
                     {
                         this.state.result.map(employee => (
@@ -36,7 +44,8 @@ class EmployeeTable extends React.Component {
                         ))
                     }
                 </tbody>
-            </table>
+            </Table>
+            {/* </table> */}
             </div>
         );
     } 
