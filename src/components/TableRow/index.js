@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 import Image from "react-bootstrap/Image";
 
-function EmployeeRow(props) {
+function TableRow(props) {
     return (
         <tr>
             <td>{props.id}</td>
@@ -13,4 +13,4 @@ function EmployeeRow(props) {
     );
 }
 
-export default EmployeeRow;
+export default TableRow;
