@@ -1,11 +1,11 @@
 import React from "react";
 import "./style.css";
-import Table from "react-bootstrap/Table";
+import { Table } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import Title from "../Title";
-import SearchForm from "../../SearchForm";
+import SearchForm from "../SearchForm";
+import TableBody from "../TableBody";
 import TableHeader from "../TableHeader";
-import TableRow from "../TableRow";
 import API from "../../utils/API";
 
 class EmployeeDirectory extends React.Component {
@@ -71,19 +71,9 @@ class EmployeeDirectory extends React.Component {
                             header3="Name"
                             header4="Email"
                         />
-                        <tbody>
-                            {
-                                filteredEmpList.map(employee => (
-                                    <TableRow 
-                                        key={employee.id}
-                                        id={employee.id}
-                                        photo={employee.photo}
-                                        name={employee.name}
-                                        email={employee.email}
-                                    />
-                                ))
-                            }
-                        </tbody>
+                        <TableBody
+                            filteredEmpList={filteredEmpList}
+                        />
                     </Table>
                 </Container>
             </div>
