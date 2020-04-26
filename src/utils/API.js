@@ -1,12 +1,8 @@
 import axios from "axios";
-const BASEURL = "https://api.github.com/users";
-// const APIKEY = "&apikey=trilogy";
+const BASEURL = "https://reqres.in/api/users";
 
 export default {
-    search: function(query) {
+    search: function() {
         return axios.get(BASEURL);
     }
-//   search: function(query) {
-//     return axios.get(BASEURL + query + APIKEY);
-//   }
 };

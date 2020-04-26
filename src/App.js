@@ -1,14 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Wrapper from "./components/Wrapper";
-import Title from "./components/Title";
-import EmployeeTable from "./components/EmployeeTable";
+import EmployeeDirectory from "./components/EmployeeDirectory";
 
 function App() {
   return (
     <Wrapper>
-      <Title>Employee Directory</Title>
-      <EmployeeTable />
+      <EmployeeDirectory />
     </Wrapper>
   );
 }
