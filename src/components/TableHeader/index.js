@@ -1,13 +1,14 @@
 import React from "react";
+import "./style.css";
 
 function TableHeader(props) {
     return (
         <thead>
         <tr>
-            <th>{props.header1}</th>
-            <th>{props.header2}</th>
-            <th>{props.header3}</th>
-            <th>{props.header4}</th>
+            <th onClick={props.handleSortByID}>{props.headerID}</th>
+            <th>{props.headerPhoto}</th>
+            <th onClick={props.handleSortByName}>{props.headerName}</th>
+            <th>{props.headerEmail}</th>
         </tr>
         </thead>
     )

@@ -11,6 +11,8 @@ import API from "../../utils/API";
 class EmployeeDirectory extends React.Component {
     state = {
         employees: [],
+        sortID: "desc",
+        sortName: "asc",
         search: ""
     }
 
@@ -23,6 +25,7 @@ class EmployeeDirectory extends React.Component {
         .then(res => {
             const empList = this.createEmpList(res.data.data);
             this.setState({employees: empList});
+            this.setState({filteredEmpList: empList});
         })
         .catch(err => console.log(err));
     }
@@ -41,9 +44,9 @@ class EmployeeDirectory extends React.Component {
     }
 
     // Create and return a filtered list of employees.
-    createFilteredEmpList = list => {
-        let filteredList = list.filter(item => {
-            return item.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
+    createFilteredEmpList = search => {
+        let filteredList = this.state.employees.filter(item => {
+            return item.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
         });
         return filteredList;
     }
@@ -52,8 +55,36 @@ class EmployeeDirectory extends React.Component {
         this.setState({search: event.target.value});
     }
 
+    handleSortByID = event => {
+        event.preventDefault();
+        this.setState({employees: this.state.employees.sort((a, b) => {
+            if(this.state.sortID === "asc") {
+                this.setState({sortID: "desc"});
+                return a.id - b.id;
+            } else {
+                this.setState({sortID: "asc"});
+                return b.id - a.id;
+            } 
+        })});
+    }
+
+    handleSortByName = event => {
+        event.preventDefault();
+        this.setState({employees: this.state.employees.sort((a, b) => {
+            const x = a.name.toLowerCase();
+            const y = b.name.toLowerCase();
+            if(this.state.sortName === "asc") {
+                this.setState({sortName: "desc"});
+                return x < y ? -1 : 1;
+            } else {
+                this.setState({sortName: "asc"});
+                return x > y ? -1 : 1;
+            }
+        })});
+    }
+
     render() {
-        let filteredEmpList = this.createFilteredEmpList(this.state.employees);
+        let filteredEmpList = this.createFilteredEmpList(this.state.search);
 
         return (
             <div>
@@ -66,10 +97,12 @@ class EmployeeDirectory extends React.Component {
                 <Container>
                     <Table variant="dark" hover>
                         <TableHeader
-                            header1="ID"
-                            header2="Photo"
-                            header3="Name"
-                            header4="Email"
+                            headerID="ID"
+                            handleSortByID={this.handleSortByID}
+                            headerPhoto="Photo"
+                            headerName="Name"
+                            handleSortByName={this.handleSortByName}
+                            headerEmail="Email"
                         />
                         <TableBody
                             filteredEmpList={filteredEmpList}
