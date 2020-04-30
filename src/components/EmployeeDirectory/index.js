@@ -25,7 +25,6 @@ class EmployeeDirectory extends React.Component {
         .then(res => {
             const empList = this.createEmpList(res.data.data);
             this.setState({employees: empList});
-            this.setState({filteredEmpList: empList});
         })
         .catch(err => console.log(err));
     }
